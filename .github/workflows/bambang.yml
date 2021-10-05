@@ -1,0 +1,34 @@
+name: windows signtool exe
+description: support for windows signtool.exe wiht/without password required
+branding:
+  icon: 'award'
+  color: 'green'
+inputs:
+  certificate:
+    description: 'The base64 encoded certificate.'
+    required: true
+#  password:
+#    description: 'The password of certificate.'
+#    required: false
+#  import_certificate:
+#    description: "true" is import certificate using CERTUTIL
+#    required: false
+  sign_args:
+    description: arguments could be passed to signtool.exe, "signtool sign /f {cert} {sign_args}"
+    required: false
+  folder:
+    description: 'The folder that contains the files to sign.'
+    required: false
+  recursive:
+    description: 'Recursively search for supported files.'
+    required: false
+outputs:
+  signtool_cmd:
+    description: (not support for NUGET sign for now) the signtool-cmd with arguments, can be used to manual sign files
+  certificate_pfx_filepath:
+    description: converted base64 string into pfx file path
+  sign_args:
+    description: generated arguments for signtool.exe, useful when use with local signtool.exe
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
